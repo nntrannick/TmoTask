@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmoTask", "TmoTask\TmoTask.csproj", "{D263AF44-4C04-4C4F-A28F-AE35F90C65CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMO.WebApi", "TmoTask\TMO.WebApi.csproj", "{D263AF44-4C04-4C4F-A28F-AE35F90C65CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMO.Services", "TMO.Services\TMO.Services.csproj", "{733F5650-925F-4736-BE6F-B9587143528E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMO.Repositories", "TMO.Repositories\TMO.Repositories.csproj", "{65451DDE-BFC5-4E40-B952-1A58490BE670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMO.DataAccess", "DataAccess\TMO.DataAccess.csproj", "{C739AC5C-4E75-4EED-A95E-027027BEF133}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "tmo.client", "TMO.Client\tmo.client.esproj", "{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,24 @@ Global
 		{D263AF44-4C04-4C4F-A28F-AE35F90C65CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D263AF44-4C04-4C4F-A28F-AE35F90C65CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D263AF44-4C04-4C4F-A28F-AE35F90C65CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733F5650-925F-4736-BE6F-B9587143528E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733F5650-925F-4736-BE6F-B9587143528E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733F5650-925F-4736-BE6F-B9587143528E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733F5650-925F-4736-BE6F-B9587143528E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65451DDE-BFC5-4E40-B952-1A58490BE670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65451DDE-BFC5-4E40-B952-1A58490BE670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65451DDE-BFC5-4E40-B952-1A58490BE670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65451DDE-BFC5-4E40-B952-1A58490BE670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C739AC5C-4E75-4EED-A95E-027027BEF133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C739AC5C-4E75-4EED-A95E-027027BEF133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C739AC5C-4E75-4EED-A95E-027027BEF133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C739AC5C-4E75-4EED-A95E-027027BEF133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB57AD4B-2F63-AA1C-6CB5-4A595FA76926}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

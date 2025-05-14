@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TMO.Repositories\TMO.Repositories.csproj" />
+    <ProjectReference Include="..\TMO.Services\TMO.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="orders.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

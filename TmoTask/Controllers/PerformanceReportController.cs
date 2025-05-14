@@ -2,6 +2,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using TMO.Services.Interface;
 
 namespace TmoTask.Controllers
 {
@@ -9,10 +10,44 @@ namespace TmoTask.Controllers
     [Route("[controller]")]
     public class PerformanceReportController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get(string branch)
+        private IOrderService _orderService { get; set; }
+
+        public PerformanceReportController(IOrderService orderService)
         {
-            throw new NotImplementedException();
+            this._orderService = orderService;
+        }
+
+        [HttpGet("getbranches")]
+        public IActionResult GetBranches()
+        {
+            return this._orderService.GetAllBranches() != null ? Ok(this._orderService.GetAllBranches()) : NotFound("No branches found");
+        }
+
+        [HttpGet("bestsellersbybranch")]
+        public IActionResult GetBestSellersByBranch(string branch)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(branch) == true)
+                {
+                    return BadRequest("Branch name cannot be null or empty");
+                }
+
+                var sellersByBranch = this._orderService.GetBestSellersByBranch(branch);
+
+                if (sellersByBranch != null && sellersByBranch.Count > 0)
+                {
+                    return Ok(sellersByBranch);
+                }
+                else
+                {
+                    return NotFound("No orders found for the specified branch");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting orders. Error: {ex.InnerException?.Message ?? ex.Message}.");
+            }
         }
     }
 }
