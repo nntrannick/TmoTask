@@ -1,35 +1,118 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [options, setOptions] = useState([]);
+    const [selectedValue, setSelectedValue] = useState('');
+    const [performances, setPerformances] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        try {
+            fetch("http://localhost:5139/api/PerformanceReport/getbranches")
+                .then(response => response.json())
+                .then(data => {
+                    // Assuming data is an array of objects with 'id' and 'name' properties
+                    console.log(data);
+                    setOptions(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+
+        } catch (error) {
+            console.error('Error branch data:', error);
+        }
+
+    }, []);
+
+
+    const handleSelectChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+    const currencyFormat = (value) => {
+        return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    };
+
+    useEffect(() => {
+        try {
+            console.log("Selected value:", selectedValue);
+
+            const url = `http://localhost:5139/api/PerformanceReport/bestsellersbybranch/${selectedValue}`;
+
+            if (selectedValue != "") {
+                setLoading(true)
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Assuming data is an array of objects with 'id' and 'name' properties
+                        console.log(data);
+                        setPerformances(data);
+
+                        setLoading(false)
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+        } catch (error) {
+            console.error('Error branch data:', error);
+        }
+
+    }, [selectedValue]);
+
+
+
+    return (
+        <>
+            <h2>Top-Performing Seller for Each Month</h2>
+
+            <div>
+                <select value={selectedValue} onChange={handleSelectChange}>
+                    <option value="" disabled>Select a branch</option>
+                    {options.map(option => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+                <p>Selected branch: {selectedValue}</p>
+            </div>
+
+            
+            <div className="App">
+                {loading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <>
+                        <table border={1}>
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Seller</th>
+                                    <th>Total Orders</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {performances.map(item => (
+                                    <tr key={item.month}>
+                                        <td>{item.monthName}</td>
+                                        <td>{item.seller}</td>
+                                        <td className="text-align-right">{item.totalOrder}</td>
+                                        <td className="text-align-right">{currencyFormat(item.totalPrice)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </>
+                )}
+            </div>
+
+        </>
+    )
 }
 
 export default App

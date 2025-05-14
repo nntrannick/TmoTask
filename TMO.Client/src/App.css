@@ -40,3 +40,51 @@
 .read-the-docs {
   color: #888;
 }
+
+table {
+    border: 1px solid #888;
+    font-size: 12px;
+    width: 800px;
+}
+
+th {
+    border: none;
+    padding: 2px;
+    color: bisque;
+}
+
+tr {
+    border: none;
+    padding: 2px;
+}
+
+td {
+    padding: 2px;
+    border: none;
+    width: 200px;
+}
+
+.text-align-right {
+    text-align: right;
+    padding-right: 10px;
+}
+
+select {
+    padding: 4px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    background-color: #333;
+    padding: 10px;
+}
+
+.grid-container > div {
+    background-color: #f1f1f1;
+    color: #000;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+}

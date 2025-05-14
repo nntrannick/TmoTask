@@ -47,12 +47,14 @@ namespace TMO.Services.Implementation
                 .GroupBy(g => new { g.Year, g.Month }) // Group by year and month
                 .Select(g => g.OrderByDescending(s => s.TotalPrice).First()) // Get the seller with the highest sales
                 .Select(result => new SellerPerformance { 
-                        Month = new DateTime(result.Year, result.Month, 1).ToString("MMMM"), 
+                        Month = result.Month,
+                        MonthName = new DateTime(result.Year, result.Month, 1).ToString("MMMM"), 
                         Seller = result.Seller, 
                         TotalOrder = result.TotalOrders, 
                         TotalPrice = result.TotalPrice
                     } 
                 )
+                .OrderBy(s => s.Month)
                 .ToList();
 
             return results;

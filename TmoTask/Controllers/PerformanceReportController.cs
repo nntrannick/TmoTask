@@ -1,5 +1,6 @@
 using CsvHelper;
 using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using TMO.Services.Interface;
@@ -7,7 +8,7 @@ using TMO.Services.Interface;
 namespace TmoTask.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PerformanceReportController : ControllerBase
     {
         private IOrderService _orderService { get; set; }
@@ -23,7 +24,7 @@ namespace TmoTask.Controllers
             return this._orderService.GetAllBranches() != null ? Ok(this._orderService.GetAllBranches()) : NotFound("No branches found");
         }
 
-        [HttpGet("bestsellersbybranch")]
+        [HttpGet("bestsellersbybranch/{branch}")]
         public IActionResult GetBestSellersByBranch(string branch)
         {
             try
